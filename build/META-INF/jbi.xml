@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jbi xmlns="http://java.sun.com/xml/ns/jbi" xmlns:ns0="http://enterprise.netbeans.org/bpel/HMS_BPEL_V1/HMS_BPEL_V1" xmlns:ns1="http://www.hotelapp.com/xml/user" xmlns:ns2="http://www.hotelapp.com/xml/room" xmlns:ns3="uk.ac.bcu.soa.wcf" xmlns:ns4="http://www.hotelapp.com/xml/mail" xmlns:ns5="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" xmlns:ns6="http://www.sun.com/jbi/descriptor/service-unit" version="1.0">
+    <services binding-component="false">
+        <provides endpoint-name="HMS_BPEL_V1WSDLPortTypeRole_myRole" interface-name="ns5:HMS_BPEL_V1WSDLPortType" service-name="ns0:UR_PL">
+            <ns6:display-name>UR_PL</ns6:display-name>
+            <ns6:process-name>HMS_BPEL_V1</ns6:process-name>
+            <ns6:file-path>HMS_BPEL_V1.bpel</ns6:file-path>
+        </provides>
+        <consumes endpoint-name="UserPortRole_partnerRole" interface-name="ns1:UserPort" service-name="ns0:USER_MGN">
+            <ns6:display-name>USER_MGN</ns6:display-name>
+            <ns6:process-name>HMS_BPEL_V1</ns6:process-name>
+            <ns6:file-path>HMS_BPEL_V1.bpel</ns6:file-path>
+        </consumes>
+        <consumes endpoint-name="RoomPortRole_partnerRole" interface-name="ns2:RoomPort" service-name="ns0:RoomSoapSrv">
+            <ns6:display-name>RoomSoapSrv</ns6:display-name>
+            <ns6:process-name>HMS_BPEL_V1</ns6:process-name>
+            <ns6:file-path>HMS_BPEL_V1.bpel</ns6:file-path>
+        </consumes>
+        <consumes endpoint-name="IDiscountRegistryRole_partnerRole" interface-name="ns3:IDiscountRegistry" service-name="ns0:DiscountSrv">
+            <ns6:display-name>DiscountSrv</ns6:display-name>
+            <ns6:process-name>HMS_BPEL_V1</ns6:process-name>
+            <ns6:file-path>HMS_BPEL_V1.bpel</ns6:file-path>
+        </consumes>
+        <consumes endpoint-name="MailPortRole_partnerRole" interface-name="ns4:MailPort" service-name="ns0:mailSoapSrv">
+            <ns6:display-name>mailSoapSrv</ns6:display-name>
+            <ns6:process-name>HMS_BPEL_V1</ns6:process-name>
+            <ns6:file-path>HMS_BPEL_V1.bpel</ns6:file-path>
+        </consumes>
+    </services>
+</jbi>

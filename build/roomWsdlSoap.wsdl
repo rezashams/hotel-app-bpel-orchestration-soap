@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.hotelapp.com/xml/room" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.hotelapp.com/xml/room" targetNamespace="http://www.hotelapp.com/xml/room">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.hotelapp.com/xml/room">
+
+    <xs:element name="getAllStringIdRoomsRequest">
+        <xs:complexType>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getAllStringIdRoomsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="roomsJson" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="createRoomRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="description" type="xs:string"/>
+                <xs:element name="price" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="createRoomResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deleteRoomRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="roomId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deleteRoomResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateRoomRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="roomId" type="xs:long"/>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="description" type="xs:string"/>
+                <xs:element name="price" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateRoomResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:element name="isRoomAvailableRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="roomId" type="xs:long"/>
+                <xs:element name="fromDate" type="xs:string"/>
+                <xs:element name="toDate" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="isRoomAvailableResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="isRoomAvailable" type="xs:boolean"/>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="createBookRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="roomId" type="xs:long"/>
+                <xs:element name="fromDate" type="xs:string"/>
+                <xs:element name="toDate" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="createBookResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="serviceStatus">
+        <xs:sequence>
+            <xs:element name="statusCode" type="xs:string"/>
+            <xs:element name="message" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="createRoomResponse">
+    <wsdl:part element="tns:createRoomResponse" name="createRoomResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllStringIdRoomsRequest">
+    <wsdl:part element="tns:getAllStringIdRoomsRequest" name="getAllStringIdRoomsRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteRoomRequest">
+    <wsdl:part element="tns:deleteRoomRequest" name="deleteRoomRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateRoomResponse">
+    <wsdl:part element="tns:updateRoomResponse" name="updateRoomResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createBookResponse">
+    <wsdl:part element="tns:createBookResponse" name="createBookResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteRoomResponse">
+    <wsdl:part element="tns:deleteRoomResponse" name="deleteRoomResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="isRoomAvailableResponse">
+    <wsdl:part element="tns:isRoomAvailableResponse" name="isRoomAvailableResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createBookRequest">
+    <wsdl:part element="tns:createBookRequest" name="createBookRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateRoomRequest">
+    <wsdl:part element="tns:updateRoomRequest" name="updateRoomRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllStringIdRoomsResponse">
+    <wsdl:part element="tns:getAllStringIdRoomsResponse" name="getAllStringIdRoomsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="isRoomAvailableRequest">
+    <wsdl:part element="tns:isRoomAvailableRequest" name="isRoomAvailableRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createRoomRequest">
+    <wsdl:part element="tns:createRoomRequest" name="createRoomRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="RoomPort">
+    <wsdl:operation name="createRoom">
+      <wsdl:input message="tns:createRoomRequest" name="createRoomRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:createRoomResponse" name="createRoomResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllStringIdRooms">
+      <wsdl:input message="tns:getAllStringIdRoomsRequest" name="getAllStringIdRoomsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getAllStringIdRoomsResponse" name="getAllStringIdRoomsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteRoom">
+      <wsdl:input message="tns:deleteRoomRequest" name="deleteRoomRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteRoomResponse" name="deleteRoomResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateRoom">
+      <wsdl:input message="tns:updateRoomRequest" name="updateRoomRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:updateRoomResponse" name="updateRoomResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createBook">
+      <wsdl:input message="tns:createBookRequest" name="createBookRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:createBookResponse" name="createBookResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isRoomAvailable">
+      <wsdl:input message="tns:isRoomAvailableRequest" name="isRoomAvailableRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:isRoomAvailableResponse" name="isRoomAvailableResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RoomPortSoap11" type="tns:RoomPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="createRoom">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="createRoomRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createRoomResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllStringIdRooms">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getAllStringIdRoomsRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllStringIdRoomsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteRoom">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="deleteRoomRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteRoomResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateRoom">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="updateRoomRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateRoomResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createBook">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="createBookRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createBookResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isRoomAvailable">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="isRoomAvailableRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="isRoomAvailableResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RoomPortService">
+    <wsdl:port binding="tns:RoomPortSoap11" name="RoomPortSoap11">
+      <soap:address location="http://localhost:9192/service/room"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

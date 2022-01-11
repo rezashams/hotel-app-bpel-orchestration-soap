@@ -1,0 +1,1238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<process
+    name="HMS_BPEL_V1"
+    targetNamespace="http://enterprise.netbeans.org/bpel/HMS_BPEL_V1/HMS_BPEL_V1"
+    xmlns:tns="http://enterprise.netbeans.org/bpel/HMS_BPEL_V1/HMS_BPEL_V1"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+    xmlns:sxt="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Trace" 
+    xmlns:sxed="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor2"
+    xmlns:sxat="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Attachment"
+    xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling" xmlns:ns0="http://www.hotelapp.com/xml/user" xmlns:ns1="http://xml.netbeans.org/schema/Output.xsd" xmlns:sxnmp="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/NMProperty" xmlns:ns2="uk.ac.bcu.soa.wcf" xmlns:ns3="http://www.hotelapp.com/xml/room" xmlns:ns4="http://www.hotelapp.com/xml/mail">
+    <import namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" location="HMS_BPEL_V1WSDL.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/userWsdlWrapperV1.1" location="userWsdlWrapperV1.1.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://www.hotelapp.com/xml/user" location="userWsdl.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/DiscountWSDLWrapper" location="DiscountWSDLWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="uk.ac.bcu.soa.wcf" location="DiscountWSDL.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/roomWsdlSoapWrapper" location="roomWsdlSoapWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://www.hotelapp.com/xml/room" location="roomWsdlSoap.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://enterprise.netbeans.org/bpel/mailSOAPWsdlWrapper" location="mailSOAPWsdlWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://www.hotelapp.com/xml/mail" location="mailSOAPWsdl.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <partnerLinks>
+        <partnerLink name="USER_MGN" xmlns:tns="http://enterprise.netbeans.org/bpel/userWsdlWrapperV1.1" partnerLinkType="tns:UserPortLinkType" partnerRole="UserPortRole"/>
+        <partnerLink name="RoomSoapSrv" xmlns:tns="http://enterprise.netbeans.org/bpel/roomWsdlSoapWrapper" partnerLinkType="tns:RoomPortLinkType" partnerRole="RoomPortRole"/>
+        <partnerLink name="DiscountSrv" xmlns:tns="http://enterprise.netbeans.org/bpel/DiscountWSDLWrapper" partnerLinkType="tns:IDiscountRegistryLinkType" partnerRole="IDiscountRegistryRole"/>
+        <partnerLink name="mailSoapSrv" xmlns:tns="http://enterprise.netbeans.org/bpel/mailSOAPWsdlWrapper" partnerLinkType="tns:MailPortLinkType" partnerRole="MailPortRole"/>
+        <partnerLink name="UR_PL" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" partnerLinkType="tns:HMS_BPEL_V1WSDL" myRole="HMS_BPEL_V1WSDLPortTypeRole"/>
+    </partnerLinks>
+    <variables>
+        <variable name="GetAllStringIdRoomsOut" messageType="ns3:getAllStringIdRoomsResponse"/>
+        <variable name="GetAllStringIdRoomsIn" messageType="ns3:getAllStringIdRoomsRequest"/>
+        <variable name="DeleteRoomOutSOAP" messageType="ns3:deleteRoomResponse"/>
+        <variable name="DeleteRoomInSOAP" messageType="ns3:deleteRoomRequest"/>
+        <variable name="UpdateRoomOutSOAP" messageType="ns3:updateRoomResponse"/>
+        <variable name="UpdateRoomInSOAP" messageType="ns3:updateRoomRequest"/>
+        <variable name="SendEmailOutSOAP" xmlns:sch="http://www.hotelapp.com/xml/mail" messageType="sch:sendEmailResponse"/>
+        <variable name="SendEmailInSOAP" xmlns:sch="http://www.hotelapp.com/xml/mail" messageType="sch:sendEmailRequest"/>
+        <variable name="CreateBookOut" messageType="ns3:createBookResponse"/>
+        <variable name="CreateBookIn" messageType="ns3:createBookRequest"/>
+        <variable name="IsRoomAvailableOut1" xmlns:sch="http://www.hotelapp.com/xml/room" messageType="sch:isRoomAvailableResponse"/>
+        <variable name="IsRoomAvailableIn1" xmlns:sch="http://www.hotelapp.com/xml/room" messageType="sch:isRoomAvailableRequest"/>
+        <variable name="CreateRoomOut" xmlns:sch="http://www.hotelapp.com/xml/room" messageType="sch:createRoomResponse"/>
+        <variable name="CreateRoomIn" xmlns:sch="http://www.hotelapp.com/xml/room" messageType="sch:createRoomRequest"/>
+        <variable name="UpdateDiscountOut" messageType="ns2:IDiscountRegistry_UpdateDiscount_OutputMessage"/>
+        <variable name="UpdateDiscountIn" messageType="ns2:IDiscountRegistry_UpdateDiscount_InputMessage"/>
+        <variable name="CalculateDiscountOut" messageType="ns2:IDiscountRegistry_CalculateDiscount_OutputMessage"/>
+        <variable name="CalculateDiscountIn" messageType="ns2:IDiscountRegistry_CalculateDiscount_InputMessage"/>
+        <variable name="AddDiscountOut" messageType="ns2:IDiscountRegistry_AddDiscount_OutputMessage"/>
+        <variable name="AddDiscountIn" messageType="ns2:IDiscountRegistry_AddDiscount_InputMessage"/>
+        <variable name="DeleteDiscountOut" messageType="ns2:IDiscountRegistry_DeleteDiscount_OutputMessage"/>
+        <variable name="DeleteDiscountIn" messageType="ns2:IDiscountRegistry_DeleteDiscount_InputMessage"/>
+        <variable name="GetAllDiscountOut" xmlns:tns="uk.ac.bcu.soa.wcf" messageType="tns:IDiscountRegistry_GetAllDiscount_OutputMessage"/>
+        <variable name="GetAllDiscountIn" xmlns:tns="uk.ac.bcu.soa.wcf" messageType="tns:IDiscountRegistry_GetAllDiscount_InputMessage"/>
+        <variable name="BookRoomOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:bookRoomOperationResponse"/>
+        <variable name="BookRoomOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:bookRoomOperationRequest"/>
+        <variable name="GetAllDiscountOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:getAllDiscountOperationResponse"/>
+        <variable name="GetAllDiscountOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:getAllDiscountOperationRequest"/>
+        <variable name="DeleteDiscountOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:deleteDiscountOperationResponse"/>
+        <variable name="DeleteDiscountOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:deleteDiscountOperationRequest"/>
+        <variable name="UpdateDiscountOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:updateDiscountOperationResponse"/>
+        <variable name="UpdateDiscountOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:updateDiscountOperationRequest"/>
+        <variable name="AddDiscountOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:addDiscountOperationResponse"/>
+        <variable name="AddDiscountOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:addDiscountOperationRequest"/>
+        <variable name="GetRoomOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:getRoomOperationResponse"/>
+        <variable name="GetRoomOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:getRoomOperationRequest"/>
+        <variable name="UpdateRoomOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:updateRoomOperationResponse"/>
+        <variable name="UpdateRoomOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:updateRoomOperationRequest"/>
+        <variable name="DeleteRoomOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:deleteRoomOperationResponse"/>
+        <variable name="DeleteRoomOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:deleteRoomOperationRequest"/>
+        <variable name="IsManagerOut" messageType="ns0:isManagerResponse"/>
+        <variable name="IsManagerIn" messageType="ns0:isManagerRequest"/>
+        <variable name="AddRoomOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:AddRoomOperationResponse"/>
+        <variable name="AddRoomOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:AddRoomOperationRequest"/>
+        <variable name="GetAllRoomsOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:getAllRoomsOperationResponse"/>
+        <variable name="GetAllRoomsOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:getAllRoomsOperationRequest"/>
+        <variable name="SignInOut" messageType="ns0:signInResponse"/>
+        <variable name="SignInIn" messageType="ns0:signInRequest"/>
+        <variable name="SignInUserOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:SignInUserOperationResponse"/>
+        <variable name="SignInUserOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:SignInUserOperationRequest"/>
+        <variable name="UpdateUserOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:userUpdateOperationResponse1"/>
+        <variable name="UpdateUserOut" messageType="ns0:updateUserResponse"/>
+        <variable name="UpdateUserIn" messageType="ns0:updateUserRequest"/>
+        <variable name="UpdateUserOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:updateUserOperationRequest"/>
+        <variable name="IsUserAlreadyRegisteredOut1" messageType="ns0:isUserAlreadyRegisteredResponse"/>
+        <variable name="IsUserAlreadyRegisteredIn1" messageType="ns0:isUserAlreadyRegisteredRequest"/>
+        <variable name="DeleteUserOperationOut2" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:DeleteUserOperationResponse"/>
+        <variable name="DeleteUserOperationOut1" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:DeleteUserOperationResponse"/>
+        <variable name="DeleteUserOut" messageType="ns0:deleteUserResponse"/>
+        <variable name="DeleteUserIn" messageType="ns0:deleteUserRequest"/>
+        <variable name="DeleteUserOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:DeleteUserOperationRequest"/>
+        <variable name="DeleteUserOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:DeleteUserOperationResponse"/>
+        <variable name="AddUserOut" messageType="ns0:addUserResponse"/>
+        <variable name="AddUserIn" messageType="ns0:addUserRequest"/>
+        <variable name="RegisterUserOperationOut" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:RegisterUserOperationResponse"/>
+        <variable name="IsUserAlreadyRegisteredOut" xmlns:sch="http://www.hotelapp.com/xml/user" messageType="sch:isUserAlreadyRegisteredResponse"/>
+        <variable name="IsUserAlreadyRegisteredIn" xmlns:sch="http://www.hotelapp.com/xml/user" messageType="sch:isUserAlreadyRegisteredRequest"/>
+        <variable name="RegisterUserOperationIn" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" messageType="tns:RegisterUserOperationRequest"/>
+    </variables>
+    <sequence>
+        <pick name="Pick1" createInstance="yes">
+            <onMessage partnerLink="UR_PL" operation="RegisterUserOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" portType="tns:HMS_BPEL_V1WSDLPortType" variable="RegisterUserOperationIn">
+                <sequence name="Sequence1">
+                    <assign name="Assign1">
+                        <copy>
+                            <from variable="RegisterUserOperationIn" part="email"/>
+                            <to>$IsUserAlreadyRegisteredIn.isUserAlreadyRegisteredRequest/ns0:email</to>
+                        </copy>
+                    </assign>
+                    <invoke name="Invoke1" partnerLink="USER_MGN" operation="isUserAlreadyRegistered" xmlns:sch="http://www.hotelapp.com/xml/user" portType="sch:UserPort" inputVariable="IsUserAlreadyRegisteredIn" outputVariable="IsUserAlreadyRegisteredOut"/>
+                    <if name="If1">
+                        <condition>$IsUserAlreadyRegisteredOut.isUserAlreadyRegisteredResponse/ns0:isRegisteredBefore = false()</condition>
+                        <sequence name="Sequence3">
+                            <assign name="Assign3">
+                                <copy>
+                                    <from variable="RegisterUserOperationIn" part="userId"/>
+                                    <to>$AddUserIn.addUserRequest/ns0:userInfo/ns0:userId</to>
+                                </copy>
+                                <copy>
+                                    <from variable="RegisterUserOperationIn" part="firstName"/>
+                                    <to>$AddUserIn.addUserRequest/ns0:userInfo/ns0:firstName</to>
+                                </copy>
+                                <copy>
+                                    <from variable="RegisterUserOperationIn" part="lastName"/>
+                                    <to>$AddUserIn.addUserRequest/ns0:userInfo/ns0:lastName</to>
+                                </copy>
+                                <copy>
+                                    <from variable="RegisterUserOperationIn" part="email"/>
+                                    <to>$AddUserIn.addUserRequest/ns0:userInfo/ns0:email</to>
+                                </copy>
+                                <copy>
+                                    <from variable="RegisterUserOperationIn" part="password"/>
+                                    <to>$AddUserIn.addUserRequest/ns0:userInfo/ns0:password</to>
+                                </copy>
+                                <copy>
+                                    <from variable="RegisterUserOperationIn" part="isStudent"/>
+                                    <to>$AddUserIn.addUserRequest/ns0:userInfo/ns0:student</to>
+                                </copy>
+                                <copy>
+                                    <from variable="RegisterUserOperationIn" part="isManager"/>
+                                    <to>$AddUserIn.addUserRequest/ns0:userInfo/ns0:manager</to>
+                                </copy>
+                            </assign>
+                            <invoke name="Invoke2" partnerLink="USER_MGN" operation="addUser" portType="ns0:UserPort" inputVariable="AddUserIn" outputVariable="AddUserOut"/>
+                            <assign name="Assign4">
+                                <copy>
+                                    <from>$AddUserOut.addUserResponse/ns0:userInfo/ns0:userId</from>
+                                    <to>$RegisterUserOperationOut.part1/ns1:userId</to>
+                                </copy>
+                                <copy>
+                                    <from>'SUCCESS'</from>
+                                    <to>$RegisterUserOperationOut.part1/ns1:info/ns1:status</to>
+                                </copy>
+                            </assign>
+                            <reply name="Reply2" partnerLink="UR_PL" operation="RegisterUserOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="RegisterUserOperationOut"/>
+                        </sequence>
+                        <else>
+                            <sequence name="Sequence2">
+                                <assign name="Assign2">
+                                    <copy>
+                                        <from variable="RegisterUserOperationIn" part="userId"/>
+                                        <to>$RegisterUserOperationOut.part1/ns1:userId</to>
+                                    </copy>
+                                    <copy>
+                                        <from>'The user has been Registered before'</from>
+                                        <to>$RegisterUserOperationOut.part1/ns1:info/ns1:msg</to>
+                                    </copy>
+                                    <copy>
+                                        <from>'FAIL'</from>
+                                        <to>$RegisterUserOperationOut.part1/ns1:info/ns1:status</to>
+                                    </copy>
+                                </assign>
+                                <reply name="Reply1" partnerLink="UR_PL" operation="RegisterUserOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="RegisterUserOperationOut"/>
+                            </sequence>
+                        </else>
+                    </if>
+                </sequence>
+            </onMessage>
+            <onMessage partnerLink="UR_PL" operation="DeleteUserOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" portType="tns:HMS_BPEL_V1WSDLPortType" variable="DeleteUserOperationIn">
+                <sequence name="Sequence4">
+                    <assign name="Assign5">
+                        <copy>
+                            <from variable="DeleteUserOperationIn" part="email"/>
+                            <to>$IsUserAlreadyRegisteredIn1.isUserAlreadyRegisteredRequest/ns0:email</to>
+                        </copy>
+                    </assign>
+                    <invoke name="Invoke3" partnerLink="USER_MGN" operation="isUserAlreadyRegistered" portType="ns0:UserPort" inputVariable="IsUserAlreadyRegisteredIn1" outputVariable="IsUserAlreadyRegisteredOut1"/>
+                    <if name="If2">
+                        <condition>true() = $IsUserAlreadyRegisteredOut1.isUserAlreadyRegisteredResponse/ns0:isRegisteredBefore</condition>
+                        <sequence name="Sequence6">
+                            <assign name="Assign7">
+                                <copy>
+                                    <from variable="DeleteUserOperationIn" part="userId"/>
+                                    <to>$DeleteUserIn.deleteUserRequest/ns0:userId</to>
+                                </copy>
+                            </assign>
+                            <invoke name="Invoke4" partnerLink="USER_MGN" operation="deleteUser" portType="ns0:UserPort" inputVariable="DeleteUserIn" outputVariable="DeleteUserOut"/>
+                            <assign name="Assign8">
+                                <copy>
+                                    <from>$DeleteUserOut.deleteUserResponse/ns0:serviceStatus/ns0:statusCode</from>
+                                    <to>$DeleteUserOperationOut1.part1/ns1:status</to>
+                                </copy>
+                                <copy>
+                                    <from>$DeleteUserOut.deleteUserResponse/ns0:serviceStatus/ns0:message</from>
+                                    <to>$DeleteUserOperationOut1.part1/ns1:msg</to>
+                                </copy>
+                            </assign>
+                            <reply name="Reply4" partnerLink="UR_PL" operation="DeleteUserOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="DeleteUserOperationOut1"/>
+                        </sequence>
+                        <else>
+                            <sequence name="Sequence5">
+                                <assign name="Assign6">
+                                    <copy>
+                                        <from>$IsUserAlreadyRegisteredOut1.isUserAlreadyRegisteredResponse/ns0:serviceStatus/ns0:statusCode</from>
+                                        <to>$DeleteUserOperationOut2.part1/ns1:status</to>
+                                    </copy>
+                                     <copy>
+                                        <from>'The user has not been Registered before'</from>
+                                        <to>$DeleteUserOperationOut2.part1/ns1:msg</to>
+                                    </copy>
+                                </assign>
+                                <reply name="Reply3" partnerLink="UR_PL" operation="DeleteUserOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="DeleteUserOperationOut2"/>
+                            </sequence>
+                        </else>
+                    </if>
+                </sequence>
+            </onMessage>
+            <onMessage partnerLink="UR_PL" operation="UpdateUserOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" portType="tns:HMS_BPEL_V1WSDLPortType" variable="UpdateUserOperationIn">
+                <sequence name="Sequence7">
+                    <assign name="Assign9">
+                        <copy>
+                            <from variable="UpdateUserOperationIn" part="email"/>
+                            <to>$IsUserAlreadyRegisteredIn.isUserAlreadyRegisteredRequest/ns0:email</to>
+                        </copy>
+                    </assign>
+                    <invoke name="Invoke5" partnerLink="USER_MGN" operation="isUserAlreadyRegistered" portType="ns0:UserPort" inputVariable="IsUserAlreadyRegisteredIn" outputVariable="IsUserAlreadyRegisteredOut"/>
+                    <if name="If3">
+                        <condition>true() = $IsUserAlreadyRegisteredOut.isUserAlreadyRegisteredResponse/ns0:isRegisteredBefore</condition>
+                        <sequence name="Sequence9">
+                            <assign name="Assign11">
+                                <copy>
+                                    <from variable="UpdateUserOperationIn" part="userId"/>
+                                    <to>$UpdateUserIn.updateUserRequest/ns0:userInfo/ns0:userId</to>
+                                </copy>
+                                <copy>
+                                    <from variable="UpdateUserOperationIn" part="firstName"/>
+                                    <to>$UpdateUserIn.updateUserRequest/ns0:userInfo/ns0:firstName</to>
+                                </copy>
+                                <copy>
+                                    <from variable="UpdateUserOperationIn" part="lastName"/>
+                                    <to>$UpdateUserIn.updateUserRequest/ns0:userInfo/ns0:lastName</to>
+                                </copy>
+                                <copy>
+                                    <from variable="UpdateUserOperationIn" part="email"/>
+                                    <to>$UpdateUserIn.updateUserRequest/ns0:userInfo/ns0:email</to>
+                                </copy>
+                                <copy>
+                                    <from variable="UpdateUserOperationIn" part="password"/>
+                                    <to>$UpdateUserIn.updateUserRequest/ns0:userInfo/ns0:password</to>
+                                </copy>
+                                <copy>
+                                    <from variable="UpdateUserOperationIn" part="isStudent"/>
+                                    <to>$UpdateUserIn.updateUserRequest/ns0:userInfo/ns0:student</to>
+                                </copy>
+                                <copy>
+                                    <from variable="UpdateUserOperationIn" part="isManager"/>
+                                    <to>$UpdateUserIn.updateUserRequest/ns0:userInfo/ns0:manager</to>
+                                </copy>
+                            </assign>
+                            <invoke name="InvokeUpdateUser" partnerLink="USER_MGN" operation="updateUser" portType="ns0:UserPort" inputVariable="UpdateUserIn" outputVariable="UpdateUserOut"/>
+                            <assign name="Assign12">
+                                <copy>
+                                    <from>$UpdateUserOut.updateUserResponse/ns0:serviceStatus/ns0:statusCode</from>
+                                    <to>$UpdateUserOperationOut.status/ns1:status</to>
+                                </copy>
+                                <copy>
+                                    <from>$UpdateUserOut.updateUserResponse/ns0:serviceStatus/ns0:message</from>
+                                    <to>$UpdateUserOperationOut.status/ns1:msg</to>
+                                </copy>
+                            </assign>
+                            <reply name="ReplyUpdateUser2" partnerLink="UR_PL" operation="UpdateUserOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="UpdateUserOperationOut"/>
+                        </sequence>
+                        <else>
+                            <sequence name="Sequence8">
+                                <assign name="Assign10">
+                                     <copy>
+                                        <from>'The user has not been Registered before'</from>
+                                        <to>$UpdateUserOperationOut.status/ns1:msg</to>
+                                    </copy>
+                                    <copy>
+                                        <from>$IsUserAlreadyRegisteredOut.isUserAlreadyRegisteredResponse/ns0:serviceStatus/ns0:statusCode</from>
+                                        <to>$UpdateUserOperationOut.status/ns1:status</to>
+                                    </copy>
+                                </assign>
+                                <reply name="ReplyUpdateUser1" partnerLink="UR_PL" operation="UpdateUserOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="UpdateUserOperationOut"/>
+                            </sequence>
+                        </else>
+                    </if>
+                </sequence>
+            </onMessage>
+            <onMessage partnerLink="UR_PL" operation="SigninUserOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" portType="tns:HMS_BPEL_V1WSDLPortType" variable="SignInUserOperationIn">
+                <sequence name="Sequence10">
+                    <assign name="Assign13">
+                        <copy>
+                            <from variable="SignInUserOperationIn" part="email"/>
+                            <to>$IsUserAlreadyRegisteredIn.isUserAlreadyRegisteredRequest/ns0:email</to>
+                        </copy>
+                    </assign>
+                    <invoke name="InvokeIsUserAlreadyRegistered" partnerLink="USER_MGN" operation="isUserAlreadyRegistered" portType="ns0:UserPort" inputVariable="IsUserAlreadyRegisteredIn" outputVariable="IsUserAlreadyRegisteredOut"/>
+                    <if name="If4">
+                        <condition>true() = $IsUserAlreadyRegisteredOut.isUserAlreadyRegisteredResponse/ns0:isRegisteredBefore</condition>
+                        <sequence name="Sequence12">
+                            <assign name="Assign15">
+                                <copy>
+                                    <from variable="SignInUserOperationIn" part="email"/>
+                                    <to>$SignInIn.signInRequest/ns0:email</to>
+                                </copy>
+                                <copy>
+                                    <from variable="SignInUserOperationIn" part="password"/>
+                                    <to>$SignInIn.signInRequest/ns0:password</to>
+                                </copy>
+                            </assign>
+                            <invoke name="InvokeSignIn" partnerLink="USER_MGN" operation="signIn" portType="ns0:UserPort" inputVariable="SignInIn" outputVariable="SignInOut"/>
+                            <if name="If5">
+                                <condition>contains('SUCCESS', $SignInOut.signInResponse/ns0:serviceStatus/ns0:statusCode)</condition>
+                                <sequence name="Sequence14">
+                                    <assign name="Assign18">
+                                        <copy>
+                                            <from>$SignInOut.signInResponse/ns0:serviceStatus/ns0:statusCode</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:status/ns1:status</to>
+                                        </copy>
+                                        <copy>
+                                            <from>$SignInOut.signInResponse/ns0:serviceStatus/ns0:message</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:status/ns1:msg</to>
+                                        </copy>
+                                        <copy>
+                                            <from>$SignInOut.signInResponse/ns0:userInfo/ns0:userId</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:userId</to>
+                                        </copy>
+                                        <copy>
+                                            <from>$SignInOut.signInResponse/ns0:userInfo/ns0:firstName</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:firstName</to>
+                                        </copy>
+                                        <copy>
+                                            <from>$SignInOut.signInResponse/ns0:userInfo/ns0:lastName</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:lastName</to>
+                                        </copy>
+                                        <copy>
+                                            <from>$SignInOut.signInResponse/ns0:userInfo/ns0:manager</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:IsManager</to>
+                                        </copy>
+                                        <copy>
+                                            <from>$SignInOut.signInResponse/ns0:userInfo/ns0:email</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:email</to>
+                                        </copy>
+                                        <copy>
+                                            <from>$SignInOut.signInResponse/ns0:userInfo/ns0:password</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:password</to>
+                                        </copy>
+                                        <copy>
+                                            <from>$SignInOut.signInResponse/ns0:userInfo/ns0:student</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:IsStudent</to>
+                                        </copy>
+                                    </assign>
+                                    <reply name="ReplySignInUser3" partnerLink="UR_PL" operation="SigninUserOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="SignInUserOperationOut"/>
+                                </sequence>
+                                <else>
+                                    <sequence name="Sequence13">
+                                        <assign name="Assign16">
+                                            
+                                         <copy>
+                                            <from>0</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:userId</to>
+                                        </copy>
+                                        <copy>
+                                            <from>''</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:firstName</to>
+                                        </copy>
+                                        <copy>
+                                            <from>''</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:lastName</to>
+                                        </copy>
+                                        <copy>
+                                            <from>'false'</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:IsManager</to>
+                                        </copy>
+                                        <copy>
+                                            <from>''</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:email</to>
+                                        </copy>
+                                        <copy>
+                                            <from>''</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:password</to>
+                                        </copy>
+                                        <copy>
+                                            <from>'false'</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:IsStudent</to>
+                                        </copy>
+                                            <copy>
+                                                <from>$SignInOut.signInResponse/ns0:serviceStatus/ns0:statusCode</from>
+                                                <to>$SignInUserOperationOut.signinResponse/ns1:status/ns1:status</to>
+                                            </copy>
+                                            <copy>
+                                                <from>$SignInOut.signInResponse/ns0:serviceStatus/ns0:message</from>
+                                                <to>$SignInUserOperationOut.signinResponse/ns1:status/ns1:msg</to>
+                                            </copy>
+                                        </assign>
+                                        <reply name="ReplySignInUser2" partnerLink="UR_PL" operation="SigninUserOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="SignInUserOperationOut"/>
+                                    </sequence>
+                                </else>
+                            </if>
+                        </sequence>
+                        <else>
+                            <sequence name="Sequence11">
+                                <assign name="Assign14">
+                                        <copy>
+                                            <from>0</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:userId</to>
+                                        </copy>
+                                        <copy>
+                                            <from>''</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:firstName</to>
+                                        </copy>
+                                        <copy>
+                                            <from>''</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:lastName</to>
+                                        </copy>
+                                        <copy>
+                                            <from>'false'</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:IsManager</to>
+                                        </copy>
+                                        <copy>
+                                            <from>''</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:email</to>
+                                        </copy>
+                                        <copy>
+                                            <from>''</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:password</to>
+                                        </copy>
+                                        <copy>
+                                            <from>'false'</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:userInfo/ns1:IsStudent</to>
+                                        </copy>
+                                         <copy>
+                                            <from>'User has not been registered before'</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:status/ns1:msg</to>
+                                         </copy>
+                                        <copy>
+                                            <from>'FAIL'</from>
+                                            <to>$SignInUserOperationOut.signinResponse/ns1:status/ns1:status</to>
+                                        </copy>
+                                  
+                                </assign>
+                                <reply name="ReplySignInUser1" partnerLink="UR_PL" operation="SigninUserOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="SignInUserOperationOut"/>
+                            </sequence>
+                        </else>
+                    </if>
+                </sequence>
+            </onMessage>
+            <onMessage partnerLink="UR_PL" operation="AddRoomOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" portType="tns:HMS_BPEL_V1WSDLPortType" variable="AddRoomOperationIn">
+                <sequence name="Sequence16">
+                    <assign name="Assign21">
+                        <copy>
+                            <from variable="AddRoomOperationIn" part="email"/>
+                            <to>$IsUserAlreadyRegisteredIn.isUserAlreadyRegisteredRequest/ns0:email</to>
+                        </copy>
+                    </assign>
+                    <invoke name="InvokeIsUserAlreadyRegistered_AddRoom" partnerLink="USER_MGN" operation="isUserAlreadyRegistered" portType="ns0:UserPort" inputVariable="IsUserAlreadyRegisteredIn" outputVariable="IsUserAlreadyRegisteredOut"/>
+                    <if name="If6">
+                        <condition>true() = $IsUserAlreadyRegisteredOut.isUserAlreadyRegisteredResponse/ns0:isRegisteredBefore</condition>
+                        <sequence name="Sequence50">
+                            <assign name="Assign23">
+                                <copy>
+                                    <from variable="AddRoomOperationIn" part="userId"/>
+                                        <to>$IsManagerIn.isManagerRequest/ns0:userId</to>
+                                </copy>
+                            </assign>
+                            <invoke name="Invoke_Ismanager_AddRoom" partnerLink="USER_MGN" operation="isManager" portType="ns0:UserPort" inputVariable="IsManagerIn" outputVariable="IsManagerOut"/>
+                            <if name="If7">
+                                <condition>true() = $IsManagerOut.isManagerResponse/ns0:isManager</condition>
+                                <sequence name="Sequence51">
+                                    <assign name="Assign28">
+                                        <copy>
+                                            <from variable="AddRoomOperationIn" part="name"/>
+                                            <to>$CreateRoomIn.createRoomRequest/ns3:name</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="AddRoomOperationIn" part="price"/>
+                                            <to>$CreateRoomIn.createRoomRequest/ns3:price</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="AddRoomOperationIn" part="description"/>
+                                            <to>$CreateRoomIn.createRoomRequest/ns3:description</to>
+                                        </copy>
+                                    </assign>
+                                    <invoke name="InvokeAddRoom" partnerLink="RoomSoapSrv" operation="createRoom" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/RoomSrvWSDL" portType="ns3:RoomPort" inputVariable="CreateRoomIn" outputVariable="CreateRoomOut"/>
+                                    <assign name="Assign27">
+                                        <copy>
+                                            <from>$CreateRoomOut.createRoomResponse/ns3:serviceStatus/ns3:statusCode</from>
+                                            <to>$AddRoomOperationOut.addRoomResponse/ns1:status</to>
+                                        </copy>
+                                        <copy>
+                                            <from>$CreateRoomOut.createRoomResponse/ns3:serviceStatus/ns3:message</from>
+                                            <to>$AddRoomOperationOut.addRoomResponse/ns1:msg</to>
+                                        </copy>
+                                    </assign>
+                                    <reply name="ReplyAddRoom3" partnerLink="UR_PL" operation="AddRoomOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="AddRoomOperationOut"/>
+                                </sequence>
+                                <else>
+                                    <sequence name="Sequence19">
+                                        <assign name="Assign24">
+                                         <copy>
+                                        <from>'User is not manager'</from>
+                                        <to>$AddRoomOperationOut.addRoomResponse/ns1:msg</to>
+                       
+                                        </copy>
+                                        <copy>
+                                            <from>'FAIL'</from>
+                                            <to >$AddRoomOperationOut.addRoomResponse/ns1:status</to>
+                                        </copy>
+                                            <copy>
+                                                <from>''</from>
+                                                <to>$AddRoomOperationOut.addRoomResponse/ns1:name</to>
+                                            </copy>
+                                            <copy>
+                                                <from>''</from>
+                                                <to>$AddRoomOperationOut.addRoomResponse/ns1:price</to>
+                                            </copy>
+                                            <copy>
+                                                <from>''</from>
+                                                <to>$AddRoomOperationOut.addRoomResponse/ns1:description</to>
+                                            </copy>
+                                            <copy>
+                                                <from>0</from>
+                                                <to>$AddRoomOperationOut.addRoomResponse/ns1:id</to>
+                                            </copy>
+                                        </assign>
+                                        <reply name="ReplyAddRoom2" partnerLink="UR_PL" operation="AddRoomOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="AddRoomOperationOut"/>
+                                    </sequence>
+                                </else>
+                            </if>
+                        </sequence>
+                        <else>
+                            <sequence name="Sequence17">
+                                <assign name="Assign22">
+                                    <copy>
+                                        <from>'User has not been registered before'</from>
+                                        <to>$AddRoomOperationOut.addRoomResponse/ns1:msg</to>
+                       
+                                    </copy>
+                                    <copy>
+                                        <from>'FAIL'</from>
+                                        <to >$AddRoomOperationOut.addRoomResponse/ns1:status</to>
+                                    </copy>
+                                       <copy>
+                                                <from>''</from>
+                                                <to>$AddRoomOperationOut.addRoomResponse/ns1:name</to>
+                                            </copy>
+                                            <copy>
+                                                <from>0</from>
+                                                <to>$AddRoomOperationOut.addRoomResponse/ns1:price</to>
+                                            </copy>
+                                            <copy>
+                                                <from>''</from>
+                                                <to>$AddRoomOperationOut.addRoomResponse/ns1:description</to>
+                                            </copy>
+                                            <copy>
+                                                <from>0</from>
+                                                <to>$AddRoomOperationOut.addRoomResponse/ns1:id</to>
+                                            </copy>
+                                </assign>
+                                <reply name="ReplyAddRoom1" partnerLink="UR_PL" operation="AddRoomOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="AddRoomOperationOut"/>
+                            </sequence>
+                        </else>
+                    </if>
+                </sequence>
+            </onMessage>
+            <onMessage partnerLink="UR_PL" operation="getAllRoomsOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" portType="tns:HMS_BPEL_V1WSDLPortType" variable="GetAllRoomsOperationIn">
+                <sequence name="Sequence21">
+                    <assign name="Assign29">
+                        <copy>
+                            <from>''</from>
+                            <to variable="GetAllStringIdRoomsIn" part="getAllStringIdRoomsRequest"/>
+                        </copy>
+                    </assign>
+                    <invoke name="Invoke_getAllRooms" partnerLink="RoomSoapSrv" operation="getAllStringIdRooms" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/RoomSrvWSDL" portType="ns3:RoomPort" inputVariable="GetAllStringIdRoomsIn" outputVariable="GetAllStringIdRoomsOut"/>
+                    <assign name="Assign30">
+                        <copy>
+                            <from>$GetAllStringIdRoomsOut.getAllStringIdRoomsResponse/ns3:roomsJson</from>
+                            <to variable="GetAllRoomsOperationOut" part="part1"/>
+                        </copy>
+                    </assign>
+                    <reply name="Reply_GetAllRooms" partnerLink="UR_PL" operation="getAllRoomsOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="GetAllRoomsOperationOut"/>
+                </sequence>
+            </onMessage>
+            <onMessage partnerLink="UR_PL" operation="deleteRoomOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" portType="tns:HMS_BPEL_V1WSDLPortType" variable="DeleteRoomOperationIn">
+                <sequence name="Sequence22">
+                    <assign name="Assign31">
+                        <copy>
+                            <from variable="DeleteRoomOperationIn" part="email"/>
+                            <to>$IsUserAlreadyRegisteredIn.isUserAlreadyRegisteredRequest/ns0:email</to>
+                        </copy>
+                    </assign>
+                    <invoke name="InvokeIsRegisteredBeforeDeleteRoom" partnerLink="USER_MGN" operation="isUserAlreadyRegistered" portType="ns0:UserPort" inputVariable="IsUserAlreadyRegisteredIn" outputVariable="IsUserAlreadyRegisteredOut"/>
+                    <if name="If8">
+                          <condition>true() = $IsUserAlreadyRegisteredOut.isUserAlreadyRegisteredResponse/ns0:isRegisteredBefore</condition>
+                        <sequence name="Sequence52">
+                            <assign name="Assign33">
+                                <copy>
+                                        <from variable="DeleteRoomOperationIn" part="userId"/>
+                                            <to>$IsManagerIn.isManagerRequest/ns0:userId</to>
+                                    </copy>
+                            </assign>
+                            <invoke name="InvokeIsmanager_deleteRoom" partnerLink="USER_MGN" operation="isManager" portType="ns0:UserPort" inputVariable="IsManagerIn" outputVariable="IsManagerOut"/>
+                            <if name="If9">
+                                <condition>true() = $IsManagerOut.isManagerResponse/ns0:isManager</condition>
+                                <sequence name="Sequence53">
+                                    <assign name="Assign35">
+                                        <copy>
+                                            <from variable="DeleteRoomOperationIn" part="roomId"/>
+                                            <to>$DeleteRoomInSOAP.deleteRoomRequest/ns3:roomId</to>
+                                        </copy>
+                                    </assign>
+                                    <invoke name="Invoke_delete_room" partnerLink="RoomSoapSrv" operation="deleteRoom" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/RoomSrvWSDL" portType="ns3:RoomPort" inputVariable="DeleteRoomInSOAP" outputVariable="DeleteRoomOutSOAP"/>
+                                    <assign name="Assign37">
+                                        <copy>
+                                            <from>$DeleteRoomOutSOAP.deleteRoomResponse/ns3:serviceStatus/ns3:statusCode</from>
+                                            <to>$DeleteRoomOperationOut.status/ns1:status</to>
+                                        </copy>
+                                        <copy>
+                                            <from>$DeleteRoomOutSOAP.deleteRoomResponse/ns3:serviceStatus/ns3:message</from>
+                                            <to>$DeleteRoomOperationOut.status/ns1:msg</to>
+                                        </copy>
+                                    </assign>
+                                    <reply name="Reply_deleteRoom3" partnerLink="UR_PL" operation="deleteRoomOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="DeleteRoomOperationOut"/>
+                                </sequence>
+                                <else>
+                                        <sequence name="Sequence24">
+                                                <assign name="Assign34">
+                                                        <copy>
+                                                                <from>'User is not manager'</from>
+                                                                    <to>$DeleteRoomOperationOut.status/ns1:msg</to>
+                                                            </copy>
+                                                            <copy>
+                                                                <from>'FAIL'</from>
+                                                                    <to >$DeleteRoomOperationOut.status/ns1:status</to>
+                                                            </copy>
+                                                    </assign>
+                                                    <reply name="Reply_deleteRoom2" partnerLink="UR_PL" operation="deleteRoomOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="DeleteRoomOperationOut"/>
+                                            </sequence>
+                                    </else>
+                            </if>
+                        </sequence>
+                        <else>
+                            <sequence name="Sequence23">
+                                <assign name="Assign32">
+                                     <copy>
+                                        <from>'User has not been registered before'</from>
+                                        <to>$DeleteRoomOperationOut.status/ns1:msg</to>
+                       
+                                    </copy>
+                                    <copy>
+                                        <from>'FAIL'</from>
+                                        <to >$DeleteRoomOperationOut.status/ns1:status</to>
+                                    </copy>
+                                </assign>
+                                <reply name="Reply_deleteRoom1" partnerLink="UR_PL" operation="deleteRoomOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="DeleteRoomOperationOut"/>
+                            </sequence>
+                        </else>
+                    </if>
+                </sequence>
+            </onMessage>
+            <onMessage partnerLink="UR_PL" operation="updateRoomOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" portType="tns:HMS_BPEL_V1WSDLPortType" variable="UpdateRoomOperationIn">
+                <sequence name="Sequence25">
+                    <assign name="Assign38">
+                        <copy>
+                            <from variable="UpdateRoomOperationIn" part="email"/>
+                            <to>$IsUserAlreadyRegisteredIn.isUserAlreadyRegisteredRequest/ns0:email</to>
+                        </copy>
+                    </assign>
+                    <invoke name="Invoke_isRegisteredBefore_updateRoom" partnerLink="USER_MGN" operation="isUserAlreadyRegistered" portType="ns0:UserPort" inputVariable="IsUserAlreadyRegisteredIn" outputVariable="IsUserAlreadyRegisteredOut"/>
+                    <if name="If10">
+                        <condition>true() = $IsUserAlreadyRegisteredOut.isUserAlreadyRegisteredResponse/ns0:isRegisteredBefore</condition>
+                        <sequence name="Sequence54">
+                            <assign name="Assign40">
+                                <copy>
+                                        <from variable="UpdateRoomOperationIn" part="userId"/>
+                                            <to>$IsManagerIn.isManagerRequest/ns0:userId</to>
+                                    </copy>
+                            </assign>
+                            <invoke name="Invoke_isManager_updateRoom" partnerLink="USER_MGN" operation="isManager" portType="ns0:UserPort" inputVariable="IsManagerIn" outputVariable="IsManagerOut"/>
+                            <if name="If11">
+                                <condition>true() = $IsManagerOut.isManagerResponse/ns0:isManager</condition>
+                                <sequence name="Sequence55">
+                                    <assign name="Assign42">
+                                        <copy>
+                                            <from variable="UpdateRoomOperationIn" part="roomId"/>
+                                            <to>$UpdateRoomInSOAP.updateRoomRequest/ns3:roomId</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="UpdateRoomOperationIn" part="name"/>
+                                            <to>$UpdateRoomInSOAP.updateRoomRequest/ns3:name</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="UpdateRoomOperationIn" part="description"/>
+                                            <to>$UpdateRoomInSOAP.updateRoomRequest/ns3:description</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="UpdateRoomOperationIn" part="price"/>
+                                            <to>$UpdateRoomInSOAP.updateRoomRequest/ns3:price</to>
+                                        </copy>
+                                    </assign>
+                                    <invoke name="Invoke_updateRoomSOAP" partnerLink="RoomSoapSrv" operation="updateRoom" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/RoomSrvWSDL" portType="ns3:RoomPort" inputVariable="UpdateRoomInSOAP" outputVariable="UpdateRoomOutSOAP"/>
+                                    <assign name="Assign44">
+                                        <copy>
+                                            <from>$UpdateRoomOutSOAP.updateRoomResponse/ns3:serviceStatus/ns3:statusCode</from>
+                                            <to>$UpdateRoomOperationOut.status/ns1:status</to>
+                                        </copy>
+                                        <copy>
+                                            <from>$UpdateRoomOutSOAP.updateRoomResponse/ns3:serviceStatus/ns3:message</from>
+                                            <to>$UpdateRoomOperationOut.status/ns1:msg</to>
+                                        </copy>
+                                    </assign>
+                                    <reply name="Reply_updateroom3" partnerLink="UR_PL" operation="updateRoomOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="UpdateRoomOperationOut"/>
+                                </sequence>
+                                <else>
+                                        <sequence name="Sequence27">
+                                                <assign name="Assign41">
+                                                        <copy>
+                                                                <from>'User is not manager'</from>
+                                                                    <to>$UpdateRoomOperationOut.status/ns1:msg</to>
+                                                            </copy>
+                                                            <copy>
+                                                                <from>'FAIL'</from>
+                                                                    <to >$UpdateRoomOperationOut.status/ns1:status</to>
+                                                            </copy>
+                                                    </assign>
+                                                    <reply name="Reply_UpdateRoom2" partnerLink="UR_PL" operation="updateRoomOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="UpdateRoomOperationOut"/>
+                                            </sequence>
+                                    </else>
+                            </if>
+                        </sequence>
+                        <else>
+                            <sequence name="Sequence26">
+                                <assign name="Assign39">
+                                     <copy>
+                                         <from>'User has not been registered before'</from>
+                                         <to>$UpdateRoomOperationOut.status/ns1:msg</to>
+                                     </copy>
+                                    <copy>
+                                        <from>'FAIL'</from>
+                                        <to >$UpdateRoomOperationOut.status/ns1:status</to>
+                                    </copy>
+                                </assign>
+                                <reply name="Reply_UpdatRoom1" partnerLink="UR_PL" operation="updateRoomOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="UpdateRoomOperationOut"/>
+                            </sequence>
+                        </else>
+                    </if>
+                </sequence>
+            </onMessage>
+            <onMessage partnerLink="UR_PL" operation="addDiscountOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" portType="tns:HMS_BPEL_V1WSDLPortType" variable="AddDiscountOperationIn">
+                <sequence name="Sequence29">
+                    <assign name="Assign47">
+                        <copy>
+                            <from variable="AddDiscountOperationIn" part="email"/>
+                            <to>$IsUserAlreadyRegisteredIn.isUserAlreadyRegisteredRequest/ns0:email</to>
+                        </copy>
+                    </assign>
+                    <invoke name="Invoke_IsRegister_getDiscount" partnerLink="USER_MGN" operation="isUserAlreadyRegistered" portType="ns0:UserPort" inputVariable="IsUserAlreadyRegisteredIn" outputVariable="IsUserAlreadyRegisteredOut"/>
+                    <if name="If12">
+                        <condition>true() = $IsUserAlreadyRegisteredOut.isUserAlreadyRegisteredResponse/ns0:isRegisteredBefore</condition>
+                        <sequence name="Sequence48">
+                            <assign name="Assign49">
+                                <copy>
+                                        <from variable="AddDiscountOperationIn" part="userId"/>
+                                            <to>$IsManagerIn.isManagerRequest/ns0:userId</to>
+                                    </copy>
+                            </assign>
+                            <invoke name="InvokeIsManager_addDiscount" partnerLink="USER_MGN" operation="isManager" portType="ns0:UserPort" inputVariable="IsManagerIn" outputVariable="IsManagerOut"/>
+                            <if name="If13">
+                                <condition>true() = $IsManagerOut.isManagerResponse/ns0:isManager</condition>
+                                <sequence name="Sequence49">
+                                    <assign name="Assign74">
+                                        <copy>
+                                            <from variable="AddDiscountOperationIn" part="name"/>
+                                            <to>$AddDiscountIn.parameters/ns2:discount/ns2:Name</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="AddDiscountOperationIn" part="percentage"/>
+                                            <to>$AddDiscountIn.parameters/ns2:discount/ns2:Percentage</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="AddDiscountOperationIn" part="type"/>
+                                            <to>$AddDiscountIn.parameters/ns2:discount/ns2:Type</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="AddDiscountOperationIn" part="date"/>
+                                            <to>$AddDiscountIn.parameters/ns2:discount/ns2:Date</to>
+                                        </copy>
+                                        <copy>
+                                            <from>0</from>
+                                            <to>$AddDiscountIn.parameters/ns2:discount/ns2:ID</to>
+                                        </copy>
+                                    </assign>
+                                    <invoke name="InvokeAddDiscount" partnerLink="DiscountSrv" operation="AddDiscount" portType="ns2:IDiscountRegistry" inputVariable="AddDiscountIn" outputVariable="AddDiscountOut"/>
+                                    <if name="If20">
+                                        <condition>true() = $AddDiscountOut.parameters/ns2:AddDiscountResult</condition>
+                                        <sequence name="Sequence56">
+                                            <assign name="Assign51">
+                                                <copy>
+                                                        <from>'SUCCESS'</from>
+                                                            <to>$AddDiscountOperationOut.status/ns1:status</to>
+                                                    </copy>
+                                            </assign>
+                                            <reply name="Reply_addDiscount" partnerLink="UR_PL" operation="addDiscountOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="AddDiscountOperationOut"/>
+                                        </sequence>
+                                        <else>
+                                            <sequence name="Sequence57">
+                                                <assign name="Assign75">
+                                                    <copy>
+                                                        <from>'FAIL'</from>
+                                                        <to>$AddDiscountOperationOut.status/ns1:status</to>
+                                                    </copy>
+                                                    <copy>
+                                                        <from>'Adding discount Operation fault'</from>
+                                                        <to>$AddDiscountOperationOut.status/ns1:msg</to>
+                                                    </copy>
+                                                </assign>
+                                                <reply name="ReplyAddDiscount4" partnerLink="UR_PL" operation="addDiscountOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="AddDiscountOperationOut"/>
+                                            </sequence>
+                                        </else>
+                                    </if>
+                                </sequence>
+                                <else>
+                                        <sequence name="Sequence31">
+                                                <assign name="Assign50">
+                                                        <copy>
+                                                                <from>'FAIL'</from>
+                                                                    <to>$AddDiscountOperationOut.status/ns1:status</to>
+                                                            </copy>
+                                                            <copy>
+                                                                <from>'User is not manager'</from>
+                                                                    <to>$AddDiscountOperationOut.status/ns1:msg</to>
+                                                            </copy>
+                                                    </assign>
+                                                    <reply name="Reply_addDiscount2" partnerLink="UR_PL" operation="addDiscountOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="AddDiscountOperationOut"/>
+                                            </sequence>
+                                    </else>
+                            </if>
+                        </sequence>
+                        <else>
+                            <sequence name="Sequence30">
+                                <assign name="Assign48">
+                                    <copy>
+                                        <from>'User has not been registered before'</from>
+                                        <to>$AddDiscountOperationOut.status/ns1:msg</to>
+                                    </copy>
+                                    <copy>
+                                        <from>'FAIL'</from>
+                                        <to>$AddDiscountOperationOut.status/ns1:status</to>
+                                    </copy>
+                                </assign>
+                                <reply name="Reply_addDiscount1" partnerLink="UR_PL" operation="addDiscountOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="AddDiscountOperationOut"/>
+                            </sequence>
+                        </else>
+                    </if>
+                </sequence>
+            </onMessage>
+            <onMessage partnerLink="UR_PL" operation="updateDiscountOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" portType="tns:HMS_BPEL_V1WSDLPortType" variable="UpdateDiscountOperationIn">
+                <sequence name="Sequence32">
+                    <assign name="Assign52">
+                        <copy>
+                            <from variable="UpdateDiscountOperationIn" part="email"/>
+                            <to>$IsUserAlreadyRegisteredIn.isUserAlreadyRegisteredRequest/ns0:email</to>
+                        </copy>
+                    </assign>
+                    <invoke name="InvokeIsRegister_updateDiscount" partnerLink="USER_MGN" operation="isUserAlreadyRegistered" portType="ns0:UserPort" inputVariable="IsUserAlreadyRegisteredIn" outputVariable="IsUserAlreadyRegisteredOut"/>
+                    <if name="If14">
+                        <condition>true() = $IsUserAlreadyRegisteredOut.isUserAlreadyRegisteredResponse/ns0:isRegisteredBefore</condition>
+                        <sequence name="Sequence46">
+                            <assign name="Assign54">
+                                <copy>
+                                        <from variable="UpdateDiscountOperationIn" part="userId"/>
+                                            <to>$IsManagerIn.isManagerRequest/ns0:userId</to>
+                                    </copy>
+                            </assign>
+                            <invoke name="InvokeIsmanager_updateDiscount" partnerLink="USER_MGN" operation="isManager" portType="ns0:UserPort" inputVariable="IsManagerIn" outputVariable="IsManagerOut"/>
+                            <if name="If15">
+                                <condition>true() = $IsManagerOut.isManagerResponse/ns0:isManager</condition>
+                                <sequence name="Sequence47">
+                                    <assign name="Assign72">
+                                        <copy>
+                                            <from variable="UpdateDiscountOperationIn" part="discountId"/>
+                                            <to>$UpdateDiscountIn.parameters/ns2:discount/ns2:ID</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="UpdateDiscountOperationIn" part="name"/>
+                                            <to>$UpdateDiscountIn.parameters/ns2:discount/ns2:Name</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="UpdateDiscountOperationIn" part="percentage"/>
+                                            <to>$UpdateDiscountIn.parameters/ns2:discount/ns2:Percentage</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="UpdateDiscountOperationIn" part="type"/>
+                                            <to>$UpdateDiscountIn.parameters/ns2:discount/ns2:Type</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="UpdateDiscountOperationIn" part="date"/>
+                                            <to>$UpdateDiscountIn.parameters/ns2:discount/ns2:Date</to>
+                                        </copy>
+                                    </assign>
+                                    <invoke name="InvokeUpdateDiscount" partnerLink="DiscountSrv" operation="UpdateDiscount" portType="ns2:IDiscountRegistry" inputVariable="UpdateDiscountIn" outputVariable="UpdateDiscountOut"/>
+                                    <if name="If21">
+                                        <condition>true() = $UpdateDiscountOut.parameters/ns2:UpdateDiscountResult</condition>
+                                        <sequence name="Sequence58">
+                                            <assign name="Assign56">
+                                                <copy>
+                                                        <from>'SUCCESS'</from>
+                                                            <to>$UpdateDiscountOperationOut.status/ns1:status</to>
+                                                    </copy>
+                                            </assign>
+                                            <reply name="Reply_updateDiscount3" partnerLink="UR_PL" operation="updateDiscountOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="UpdateDiscountOperationOut"/>
+                                        </sequence>
+                                        <else>
+                                            <sequence name="Sequence59">
+                                                <assign name="Assign76">
+                                                    <copy>
+                                                        <from>'FAIL'</from>
+                                                        <to>$UpdateDiscountOperationOut.status/ns1:status</to>
+                                                    </copy>
+                                                    <copy>
+                                                        <from>'a problem in updating data'</from>
+                                                        <to>$UpdateDiscountOperationOut.status/ns1:msg</to>
+                                                    </copy>
+                                                </assign>
+                                                <reply name="ReplyUpdateDiscount4" partnerLink="UR_PL" operation="updateDiscountOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="UpdateDiscountOperationOut"/>
+                                            </sequence>
+                                        </else>
+                                    </if>
+                                </sequence>
+                                <else>
+                                        <sequence name="Sequence34">
+                                                <assign name="Assign55">
+                                                        <copy>
+                                                                <from>'FAIL'</from>
+                                                                    <to>$UpdateDiscountOperationOut.status/ns1:status</to>
+                                                            </copy>
+                                                            <copy>
+                                                                <from>'User is not Manager'</from>
+                                                                    <to>$UpdateDiscountOperationOut.status/ns1:msg</to>
+                                                            </copy>
+                                                    </assign>
+                                                    <reply name="Reply_updateDiscount2" partnerLink="UR_PL" operation="updateDiscountOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="UpdateDiscountOperationOut"/>
+                                            </sequence>
+                                    </else>
+                            </if>
+                        </sequence>
+                        <else>
+                            <sequence name="Sequence33">
+                                <assign name="Assign53">
+                                    <copy>
+                                        <from>'FAIL'</from>
+                                        <to>$UpdateDiscountOperationOut.status/ns1:status</to>
+                                    </copy>
+                                    <copy>
+                                        <from>'User has not been registered before'</from>
+                                        <to>$UpdateDiscountOperationOut.status/ns1:msg</to>
+                                    </copy>
+                                </assign>
+                                <reply name="ReplyUpdatediscount1" partnerLink="UR_PL" operation="updateDiscountOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="UpdateDiscountOperationOut"/>
+                            </sequence>
+                        </else>
+                    </if>
+                </sequence>
+            </onMessage>
+            <onMessage partnerLink="UR_PL" operation="deleteDiscountOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" portType="tns:HMS_BPEL_V1WSDLPortType" variable="DeleteDiscountOperationIn">
+                <sequence name="Sequence35">
+                    <assign name="Assign57">
+                        <copy>
+                            <from variable="DeleteDiscountOperationIn" part="email"/>
+                            <to>$IsUserAlreadyRegisteredIn.isUserAlreadyRegisteredRequest/ns0:email</to>
+                        </copy>
+                    </assign>
+                    <invoke name="InvokeIsRegister_deleteDiscount" partnerLink="USER_MGN" operation="isUserAlreadyRegistered" portType="ns0:UserPort" inputVariable="IsUserAlreadyRegisteredIn" outputVariable="IsUserAlreadyRegisteredOut"/>
+                    <if name="If16">
+                        <condition>true() = $IsUserAlreadyRegisteredOut.isUserAlreadyRegisteredResponse/ns0:isRegisteredBefore</condition>
+                        <sequence name="Sequence44">
+                            <assign name="Assign59">
+                                <copy>
+                                        <from variable="DeleteDiscountOperationIn" part="userId"/>
+                                            <to>$IsManagerIn.isManagerRequest/ns0:userId</to>
+                                    </copy>
+                            </assign>
+                            <invoke name="InvokeIsmanager_deleteDiscount" partnerLink="USER_MGN" operation="isManager" portType="ns0:UserPort" inputVariable="IsManagerIn" outputVariable="IsManagerOut"/>
+                            <if name="If17">
+                                <condition>true() = $IsManagerOut.isManagerResponse/ns0:isManager</condition>
+                                <sequence name="Sequence45">
+                                    <assign name="Assign71">
+                                        <copy>
+                                            <from variable="DeleteDiscountOperationIn" part="discountId"/>
+                                            <to>$DeleteDiscountIn.parameters/ns2:discountID</to>
+                                        </copy>
+                                    </assign>
+                                    <invoke name="InvokeDelete" partnerLink="DiscountSrv" operation="DeleteDiscount" portType="ns2:IDiscountRegistry" inputVariable="DeleteDiscountIn" outputVariable="DeleteDiscountOut"/>
+                                    <if name="If22">
+                                        <condition>true() = $DeleteDiscountOut.parameters/ns2:DeleteDiscountResult</condition>
+                                        <sequence name="Sequence61">
+                                            <assign name="Assign60">
+                                                <copy>
+                                                        <from>'SUCCESS'</from>
+                                                            <to>$DeleteDiscountOperationOut.status/ns1:status</to>
+                                                    </copy>
+                                            </assign>
+                                            <reply name="Reply_deleteDiscount3" partnerLink="UR_PL" operation="deleteDiscountOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="DeleteDiscountOperationOut"/>
+                                        </sequence>
+                                        <else>
+                                            <sequence name="Sequence60">
+                                                <assign name="Assign77">
+                                                    <copy>
+                                                        <from>'FAIL'</from>
+                                                        <to>$DeleteDiscountOperationOut.status/ns1:status</to>
+                                                    </copy>
+                                                    <copy>
+                                                        <from>'The problem in deleting Discount'</from>
+                                                        <to>$DeleteDiscountOperationOut.status/ns1:msg</to>
+                                                    </copy>
+                                                </assign>
+                                                <reply name="ReplyDeleteDiscount4" partnerLink="UR_PL" operation="deleteDiscountOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="DeleteDiscountOperationOut"/>
+                                            </sequence>
+                                        </else>
+                                    </if>
+                                </sequence>
+                                <else>
+                                        <sequence name="Sequence37">
+                                                <assign name="Assign61">
+                                                        <copy>
+                                                                <from>'FAIL'</from>
+                                                                    <to>$DeleteDiscountOperationOut.status/ns1:status</to>
+                                                            </copy>
+                                                            <copy>
+                                                                <from>'User is not manager'</from>
+                                                                    <to>$DeleteDiscountOperationOut.status/ns1:msg</to>
+                                                            </copy>
+                                                    </assign>
+                                                    <reply name="ReplyDeleteDiscount2" partnerLink="UR_PL" operation="deleteDiscountOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="DeleteDiscountOperationOut"/>
+                                            </sequence>
+                                    </else>
+                            </if>
+                        </sequence>
+                        <else>
+                            <sequence name="Sequence36">
+                                <assign name="Assign58">
+                                    <copy>
+                                        <from>'FAIL'</from>
+                                        <to>$DeleteDiscountOperationOut.status/ns1:status</to>
+                                    </copy>
+                                    <copy>
+                                        <from>'User has not been registered bfore'</from>
+                                        <to>$DeleteDiscountOperationOut.status/ns1:msg</to>
+                                    </copy>
+                                </assign>
+                                <reply name="Reply_deleteDiscount" partnerLink="UR_PL" operation="deleteDiscountOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="DeleteDiscountOperationOut"/>
+                            </sequence>
+                        </else>
+                    </if>
+                </sequence>
+            </onMessage>
+            <onMessage partnerLink="UR_PL" operation="getAllDiscountOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" portType="tns:HMS_BPEL_V1WSDLPortType" variable="GetAllDiscountOperationIn">
+                <sequence name="Sequence38">
+                    <assign name="Assign70">
+                        <copy>
+                            <from>''</from>
+                            <to variable="GetAllDiscountIn" part="parameters"/>
+                        </copy>
+                    </assign>
+                    <invoke name="InvokeGetAllDiscount" partnerLink="DiscountSrv" operation="GetAllDiscount" xmlns:tns="uk.ac.bcu.soa.wcf" portType="tns:IDiscountRegistry" inputVariable="GetAllDiscountIn" outputVariable="GetAllDiscountOut"/>
+                    <assign name="Assign62">
+                        <copy>
+                            <from>$GetAllDiscountOut.parameters/ns2:GetAllDiscountResult</from>
+                            <to variable="GetAllDiscountOperationOut" part="part1"/>
+                        </copy>
+                    </assign>
+                    <reply name="ReplyGetAllDiscount" partnerLink="UR_PL" operation="getAllDiscountOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="GetAllDiscountOperationOut"/>
+                </sequence>
+            </onMessage>
+            <onMessage partnerLink="UR_PL" operation="bookRoomOperation" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" portType="tns:HMS_BPEL_V1WSDLPortType" variable="BookRoomOperationIn">
+                <sequence name="Sequence39">
+                    <assign name="Assign63">
+                        <copy>
+                            <from variable="BookRoomOperationIn" part="email"/>
+                            <to>$IsUserAlreadyRegisteredIn.isUserAlreadyRegisteredRequest/ns0:email</to>
+                        </copy>
+                    </assign>
+                    <invoke name="Invoke_isRegister" partnerLink="USER_MGN" operation="isUserAlreadyRegistered" portType="ns0:UserPort" inputVariable="IsUserAlreadyRegisteredIn" outputVariable="IsUserAlreadyRegisteredOut"/>
+                    <if name="If18">
+                        <condition>true() = $IsUserAlreadyRegisteredOut.isUserAlreadyRegisteredResponse/ns0:isRegisteredBefore</condition>
+                        <sequence name="Sequence42">
+                            <assign name="Assign65">
+                                <copy>
+                                    <from variable="BookRoomOperationIn" part="roomId"/>
+                                    <to>$IsRoomAvailableIn1.isRoomAvailableRequest/ns3:roomId</to>
+                                </copy>
+                                <copy>
+                                    <from variable="BookRoomOperationIn" part="fromDate"/>
+                                    <to>$IsRoomAvailableIn1.isRoomAvailableRequest/ns3:fromDate</to>
+                                </copy>
+                                <copy>
+                                    <from variable="BookRoomOperationIn" part="toDate"/>
+                                    <to>$IsRoomAvailableIn1.isRoomAvailableRequest/ns3:toDate</to>
+                                </copy>
+                            </assign>
+                            <invoke name="Invoke_isRoomAvailable" partnerLink="RoomSoapSrv" operation="isRoomAvailable" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/RoomSrvWSDL" portType="sch:RoomPort" inputVariable="IsRoomAvailableIn1" outputVariable="IsRoomAvailableOut1" xmlns:sch="http://www.hotelapp.com/xml/room"/>
+                            <if name="If19">
+                                <condition>'true' = $IsRoomAvailableOut1.isRoomAvailableResponse/ns3:isRoomAvailable</condition>
+                                <sequence name="Sequence43">
+                                    <assign name="Assign67">
+                                        <copy>
+                                            <from variable="BookRoomOperationIn" part="roomId"/>
+                                            <to>$CreateBookIn.createBookRequest/ns3:roomId</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="BookRoomOperationIn" part="fromDate"/>
+                                            <to>$CreateBookIn.createBookRequest/ns3:fromDate</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="BookRoomOperationIn" part="toDate"/>
+                                            <to>$CreateBookIn.createBookRequest/ns3:toDate</to>
+                                        </copy>
+                                    </assign>
+                                    <invoke name="InvokeBookRoom" partnerLink="RoomSoapSrv" operation="createBook" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/RoomSrvWSDL" portType="ns3:RoomPort" inputVariable="CreateBookIn" outputVariable="CreateBookOut"/>
+                                    <assign name="Assign73">
+                                        <copy>
+                                            <from variable="BookRoomOperationIn" part="fromDate"/>
+                                            <to>$CalculateDiscountIn.parameters/ns2:from</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="BookRoomOperationIn" part="toDate"/>
+                                            <to>$CalculateDiscountIn.parameters/ns2:to</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="BookRoomOperationIn" part="roomPrice"/>
+                                            <to>$CalculateDiscountIn.parameters/ns2:roomPrice</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="BookRoomOperationIn" part="isStudent"/>
+                                            <to>$CalculateDiscountIn.parameters/ns2:IsStudent</to>
+                                        </copy>
+                                    </assign>
+                                    <invoke name="InvokeCalInvoice" partnerLink="DiscountSrv" operation="CalculateDiscount" portType="ns2:IDiscountRegistry" inputVariable="CalculateDiscountIn" outputVariable="CalculateDiscountOut"/>
+                                    <assign name="Assign68">
+                                        <copy>
+                                            <from>$CalculateDiscountOut.parameters/ns2:CalculateDiscountResult/ns2:DiscountedPrice</from>
+                                            <to>$SendEmailInSOAP.sendEmailRequest/ns4:discountPrice</to>
+                                        </copy>
+                                        <copy>
+                                            <from>$CalculateDiscountOut.parameters/ns2:CalculateDiscountResult/ns2:PayablePrice</from>
+                                            <to>$SendEmailInSOAP.sendEmailRequest/ns4:payablePrice</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="BookRoomOperationIn" part="email"/>
+                                            <to>$SendEmailInSOAP.sendEmailRequest/ns4:email</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="BookRoomOperationIn" part="roomName"/>
+                                            <to>$SendEmailInSOAP.sendEmailRequest/ns4:roomName</to>
+                                        </copy>
+                                    </assign>
+                                    <invoke name="InvokeEmailSrv" partnerLink="mailSoapSrv" operation="sendEmail" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/EmailSrvWSDL" portType="sch:MailPort" inputVariable="SendEmailInSOAP" outputVariable="SendEmailOutSOAP" xmlns:sch="http://www.hotelapp.com/xml/mail"/>
+                                    <assign name="Assign69">
+                                        <copy>
+                                                <from>'SUCCESS'</from>
+                                                    <to>$BookRoomOperationOut.part1/ns1:status</to>
+                                            </copy>
+                                        <copy>
+                                            <from>$CalculateDiscountOut.parameters/ns2:CalculateDiscountResult/ns2:DiscountedPrice</from>
+                                            <to>$BookRoomOperationOut.part1/ns1:discountPrice</to>
+                                        </copy>
+                                        <copy>
+                                            <from>$CalculateDiscountOut.parameters/ns2:CalculateDiscountResult/ns2:PayablePrice</from>
+                                            <to>$BookRoomOperationOut.part1/ns1:payablePrice</to>
+                                        </copy>
+                                    </assign>
+                                    <reply name="ReplyBookRoom3" partnerLink="UR_PL" operation="bookRoomOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="BookRoomOperationOut"/>
+                                </sequence>
+                                <else>
+                                        <sequence name="Sequence41">
+                                                <assign name="Assign66">
+                                                        <copy>
+                                                                <from>'FAIL'</from>
+                                                                    <to>$BookRoomOperationOut.part1/ns1:status</to>
+                                                            </copy>
+                                                            <copy>
+                                                                <from>'Room is not available on this date'</from>
+                                                                    <to>$BookRoomOperationOut.part1/ns1:msg</to>
+                                                            </copy>
+                                                            <copy>
+                                                                <from>0</from>
+                                                                    <to>$BookRoomOperationOut.part1/ns1:payablePrice</to>
+                                                            </copy>
+                                                            <copy>
+                                                                <from>0</from>
+                                                                    <to>$BookRoomOperationOut.part1/ns1:discountPrice</to>
+                                                            </copy>
+                                                    </assign>
+                                                    <reply name="ReplyBookRoom2" partnerLink="UR_PL" operation="bookRoomOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="BookRoomOperationOut"/>
+                                            </sequence>
+                                    </else>
+                            </if>
+                        </sequence>
+                        <else>
+                            <sequence name="Sequence40">
+                                <assign name="Assign64">
+                                    <copy>
+                                        <from>0</from>
+                                        <to>$BookRoomOperationOut.part1/ns1:discountPrice</to>
+                                    </copy>
+                                    <copy>
+                                        <from>0</from>
+                                        <to>$BookRoomOperationOut.part1/ns1:payablePrice</to>
+                                    </copy>
+                                    <copy>
+                                        <from>'FAIL'</from>
+                                        <to>$BookRoomOperationOut.part1/ns1:status</to>
+                                    </copy>
+                                    <copy>
+                                        <from>'User has not registered before'</from>
+                                        <to>$BookRoomOperationOut.part1/ns1:msg</to>
+                                    </copy>
+                                </assign>
+                                <reply name="Reply_BookRoom" partnerLink="UR_PL" operation="bookRoomOperation" portType="tns:HMS_BPEL_V1WSDLPortType" variable="BookRoomOperationOut"/>
+                            </sequence>
+                        </else>
+                    </if>
+                </sequence>
+            </onMessage>
+        </pick>
+    </sequence>
+</process>

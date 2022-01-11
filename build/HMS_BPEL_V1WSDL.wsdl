@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="HMS_BPEL_V1WSDL" targetNamespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL" xmlns:ns="http://xml.netbeans.org/schema/Output.xsd" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <types>
+        <xsd:schema targetNamespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL">
+            <xsd:import namespace="http://xml.netbeans.org/schema/Output.xsd" schemaLocation="output.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="RegisterUserOperationRequest">
+        <part name="userId" type="xsd:long"/>
+        <part name="firstName" type="xsd:string"/>
+        <part name="lastName" type="xsd:string"/>
+        <part name="email" type="xsd:string"/>
+        <part name="password" type="xsd:string"/>
+        <part name="isStudent" type="xsd:boolean"/>
+        <part name="isManager" type="xsd:boolean"/>
+    </message>
+    <message name="RegisterUserOperationResponse">
+        <part name="part1" type="ns:OutputType"/>
+    </message>
+    <message name="SignInUserOperationRequest">
+        <part name="email" type="xsd:string"/>
+        <part name="password" type="xsd:string"/>
+    </message>
+    <message name="SignInUserOperationResponse">
+        <part name="signinResponse" type="ns:SigninRes"/>
+    </message>
+    <message name="DeleteUserOperationRequest">
+        <part name="userId" type="xsd:long"/>
+        <part name="email" type="xsd:string"/>
+    </message>
+    <message name="DeleteUserOperationResponse">
+        <part name="part1" type="ns:infoType"/>
+    </message>
+    <message name="updateUserOperationRequest">
+        <part name="userId" type="xsd:long"/>
+        <part name="firstName" type="xsd:string"/>
+        <part name="lastName" type="xsd:string"/>
+        <part name="email" type="xsd:string"/>
+        <part name="password" type="xsd:string"/>
+        <part name="isStudent" type="xsd:boolean"/>
+        <part name="isManager" type="xsd:boolean"/>
+    </message>
+    <message name="userUpdateOperationResponse1">
+        <part name="status" type="ns:infoType"/>
+    </message>
+    <message name="getAllRoomsOperationRequest">
+          <part name="userId" type="xsd:long"/>
+    </message>
+    <message name="getAllRoomsOperationResponse">
+       <part name="part1" type="xsd:string"/>
+    </message>
+    <message name="AddRoomOperationRequest">
+        <part name="name" type="xsd:string"/>
+        <part name="price" type="xsd:int"/>
+        <part name="email" type="xsd:string"/>
+        <part name="description" type="xsd:string"/>
+        <part name="userId" type="xsd:long"/>
+    </message>
+    <message name="AddRoomOperationResponse">
+        <part name="addRoomResponse" type="ns:AddRoomRes"/>
+    </message>
+    <message name="deleteRoomOperationRequest">
+        <part name="roomId" type="xsd:long"/>
+        <part name="userId" type="xsd:long"/>
+        <part name="email" type="xsd:string"/>
+    </message>
+    <message name="deleteRoomOperationResponse">
+        <part name="status" type="ns:infoType"/>
+    </message>
+    <message name="updateRoomOperationRequest">
+        <part name="roomId" type="xsd:long"/>
+        <part name="name" type="xsd:string"/>
+        <part name="price" type="xsd:int"/>
+        <part name="email" type="xsd:string"/>
+        <part name="description" type="xsd:string"/>
+        <part name="userId" type="xsd:long"/>
+    </message>
+    <message name="updateRoomOperationResponse">
+         <part name="status" type="ns:infoType"/>
+    </message>
+    <message name="getRoomOperationRequest">
+        <part name="roomId" type="xsd:long"/>
+    </message>
+    <message name="getRoomOperationResponse">
+        <part name="part1" type="ns:Room"/>
+    </message>
+    <message name="addDiscountOperationRequest">
+        <part name="name" type="xsd:string"/>
+        <part name="type" type="xsd:string"/>
+        <part name="date" type="xsd:string"/>
+        <part name="percentage" type="xsd:int"/>
+        <part name="userId" type="xsd:long"/>
+        <part name="email" type="xsd:string"/>
+    </message>
+    <message name="addDiscountOperationResponse">
+        <part name="status" type="ns:infoType"/>
+    </message>
+    <message name="updateDiscountOperationRequest">
+        <part name="discountId" type="xsd:long"/>
+        <part name="name" type="xsd:string"/>
+        <part name="type" type="xsd:string"/>
+        <part name="date" type="xsd:string"/>
+        <part name="percentage" type="xsd:int"/>
+        <part name="userId" type="xsd:long"/>
+        <part name="email" type="xsd:string"/>
+    </message>
+    <message name="updateDiscountOperationResponse">
+        <part name="status" type="ns:infoType"/>
+    </message>
+    <message name="deleteDiscountOperationRequest">
+        <part name="discountId" type="xsd:long"/>
+        <part name="userId" type="xsd:long"/>
+        <part name="email" type="xsd:string"/>
+    </message>
+    <message name="deleteDiscountOperationResponse">
+        <part name="status" type="ns:infoType"/>
+    </message>
+    <message name="getAllDiscountOperationRequest">
+        <part name="userId" type="xsd:long"/>
+    </message>
+    <message name="getAllDiscountOperationResponse">
+        <part name="part1" type="xsd:string"/>
+    </message>
+    <message name="bookRoomOperationRequest">
+         <part name="roomId" type="xsd:long"/>
+         <part name="fromDate" type="xsd:string"/>
+         <part name="toDate" type="xsd:string"/>
+         <part name="email" type="xsd:string"/>
+         <part name="isStudent" type="xsd:boolean"/>
+         <part name="roomName" type="xsd:string"/>
+         <part name="roomPrice" type="xsd:int"/>
+    </message>
+    <message name="bookRoomOperationResponse">
+        <part name="part1" type="ns:invoice"/>
+    </message>
+    <portType name="HMS_BPEL_V1WSDLPortType">
+        <operation name="RegisterUserOperation">
+            <input name="input1" message="tns:RegisterUserOperationRequest"/>
+            <output name="output1" message="tns:RegisterUserOperationResponse"/>
+        </operation>
+        <operation name="SigninUserOperation">
+            <input name="input2" message="tns:SignInUserOperationRequest"/>
+            <output name="output2" message="tns:SignInUserOperationResponse"/>
+        </operation>
+        <operation name="DeleteUserOperation">
+            <input name="input3" message="tns:DeleteUserOperationRequest"/>
+            <output name="output3" message="tns:DeleteUserOperationResponse"/>
+        </operation>
+        <operation name="UpdateUserOperation">
+            <input name="input4" message="tns:updateUserOperationRequest"/>
+            <output name="output4" message="tns:userUpdateOperationResponse1"/>
+        </operation>
+        <operation name="getAllRoomsOperation">
+            <input name="input5" message="tns:getAllRoomsOperationRequest"/>
+            <output name="output5" message="tns:getAllRoomsOperationResponse"/>
+        </operation>
+        <operation name="AddRoomOperation">
+            <input name="input6" message="tns:AddRoomOperationRequest"/>
+            <output name="output6" message="tns:AddRoomOperationResponse"/>
+        </operation>
+        <operation name="deleteRoomOperation">
+            <input name="input7" message="tns:deleteRoomOperationRequest"/>
+            <output name="output7" message="tns:deleteRoomOperationResponse"/>
+        </operation>
+        <operation name="updateRoomOperation">
+            <input name="input8" message="tns:updateRoomOperationRequest"/>
+            <output name="output8" message="tns:updateRoomOperationResponse"/>
+        </operation>
+        <operation name="getRoomOperation">
+            <input name="input9" message="tns:getRoomOperationRequest"/>
+            <output name="output9" message="tns:getRoomOperationResponse"/>
+        </operation>
+        <operation name="addDiscountOperation">
+            <input name="input10" message="tns:addDiscountOperationRequest"/>
+            <output name="output10" message="tns:addDiscountOperationResponse"/>
+        </operation>
+        <operation name="updateDiscountOperation">
+            <input name="input11" message="tns:updateDiscountOperationRequest"/>
+            <output name="output11" message="tns:updateDiscountOperationResponse"/>
+        </operation>
+        <operation name="deleteDiscountOperation">
+            <input name="input12" message="tns:deleteDiscountOperationRequest"/>
+            <output name="output12" message="tns:deleteDiscountOperationResponse"/>
+        </operation>
+        <operation name="getAllDiscountOperation">
+            <input name="input13" message="tns:getAllDiscountOperationRequest"/>
+            <output name="output13" message="tns:getAllDiscountOperationResponse"/>
+        </operation>
+        <operation name="bookRoomOperation">
+            <input name="input14" message="tns:bookRoomOperationRequest"/>
+            <output name="output14" message="tns:bookRoomOperationResponse"/>
+        </operation>
+    </portType>
+    <binding name="HMS_BPEL_V1WSDLBinding" type="tns:HMS_BPEL_V1WSDLPortType">
+        <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="RegisterUserOperation">
+            <soap:operation/>
+            <input name="input1">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </input>
+            <output name="output1">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </output>
+        </operation>
+        <operation name="DeleteUserOperation">
+            <input name="input3">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </input>
+            <output name="output3">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </output>
+        </operation>
+        <operation name="UpdateUserOperation">
+            <input name="input4">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </input>
+            <output name="output4">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </output>
+        </operation>
+        <operation name="SigninUserOperation">
+            <input name="input2">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </input>
+            <output name="output2">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </output>
+        </operation>
+        <operation name="getAllRoomsOperation">
+            <input name="input5">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </input>
+            <output name="output5">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </output>
+        </operation>
+        <operation name="AddRoomOperation">
+            <input name="input6">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </input>
+            <output name="output6">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </output>
+        </operation>
+        <operation name="deleteRoomOperation">
+            <input name="input7">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </input>
+            <output name="output7">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </output>
+        </operation>
+        <operation name="updateRoomOperation">
+            <input name="input8">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </input>
+            <output name="output8">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </output>
+        </operation>
+        <operation name="getRoomOperation">
+            <input name="input9">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </input>
+            <output name="output9">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </output>
+        </operation>
+        <operation name="addDiscountOperation">
+            <input name="input10">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </input>
+            <output name="output10">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </output>
+        </operation>
+        <operation name="updateDiscountOperation">
+            <input name="input11">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </input>
+            <output name="output11">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </output>
+        </operation>
+        <operation name="deleteDiscountOperation">
+            <input name="input12">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </input>
+            <output name="output12">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </output>
+        </operation>
+        <operation name="getAllDiscountOperation">
+            <input name="input13">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </input>
+            <output name="output13">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </output>
+        </operation>
+        <operation name="bookRoomOperation">
+            <input name="input14">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </input>
+            <output name="output14">
+                <soap:body use="literal" namespace="http://j2ee.netbeans.org/wsdl/HMS_BPEL_V1/src/HMS_BPEL_V1WSDL"/>
+            </output>
+        </operation>
+    </binding>
+    <service name="HMS_BPEL_V1WSDLService">
+        <port name="HMS_BPEL_V1WSDLPort" binding="tns:HMS_BPEL_V1WSDLBinding">
+            <soap:address location="http://localhost:3535/HMS_BPEL_V1WSDLService/HMS_BPEL_V1WSDLPort"/>
+        </port>
+    </service>
+    <plnk:partnerLinkType name="HMS_BPEL_V1WSDL">
+        <!-- A partner link type is automatically generated when a new port type is added. Partner link types are used by BPEL processes. 
+In a BPEL process, a partner link represents the interaction between the BPEL process and a partner service. Each partner link is associated with a partner link type.
+A partner link type characterizes the conversational relationship between two services. The partner link type can have one or two roles.-->
+        <plnk:role name="HMS_BPEL_V1WSDLPortTypeRole" portType="tns:HMS_BPEL_V1WSDLPortType"/>
+    </plnk:partnerLinkType>
+</definitions>

@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.hotelapp.com/xml/user" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.hotelapp.com/xml/user" targetNamespace="http://www.hotelapp.com/xml/user">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.hotelapp.com/xml/user">
+
+    <xs:element name="getUserByIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="userId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getUserByIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="userInfo" type="tns:userInfo"/>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="addUserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="userInfo" type="tns:userInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="addUserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+                <xs:element name="userInfo" type="tns:userInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deleteUserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="userId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateUserRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="userInfo" type="tns:userInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="updateUserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="getAllUsersRequest">
+        <xs:complexType/>
+    </xs:element>
+    <xs:element name="getAllUsersResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="userInfo" type="tns:userInfo"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deleteUserResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="isUserAlreadyRegisteredRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="email" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="isUserAlreadyRegisteredResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="isRegisteredBefore" type="xs:boolean"/>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="signInRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="email" type="xs:string"/>
+                <xs:element name="password" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="signInResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="userInfo" type="tns:userInfo"/>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="isManagerRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="userId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="isManagerResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="isManager" type="xs:boolean"/>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="isStudentRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="userId" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="isStudentResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="isStudent" type="xs:boolean"/>
+                <xs:element name="serviceStatus" type="tns:serviceStatus"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="userInfo">
+        <xs:sequence>
+            <xs:element name="userId" type="xs:long"/>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="manager" type="xs:boolean"/>
+            <xs:element name="email" type="xs:string"/>
+            <xs:element name="password" type="xs:string"/>
+            <xs:element name="student" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="serviceStatus">
+        <xs:sequence>
+            <xs:element name="statusCode" type="xs:string"/>
+            <xs:element name="message" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+
+
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getAllUsersResponse">
+    <wsdl:part element="tns:getAllUsersResponse" name="getAllUsersResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUserByIdRequest">
+    <wsdl:part element="tns:getUserByIdRequest" name="getUserByIdRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="isUserAlreadyRegisteredResponse">
+    <wsdl:part element="tns:isUserAlreadyRegisteredResponse" name="isUserAlreadyRegisteredResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addUserRequest">
+    <wsdl:part element="tns:addUserRequest" name="addUserRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteUserRequest">
+    <wsdl:part element="tns:deleteUserRequest" name="deleteUserRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateUserResponse">
+    <wsdl:part element="tns:updateUserResponse" name="updateUserResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteUserResponse">
+    <wsdl:part element="tns:deleteUserResponse" name="deleteUserResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="signInRequest">
+    <wsdl:part element="tns:signInRequest" name="signInRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateUserRequest">
+    <wsdl:part element="tns:updateUserRequest" name="updateUserRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="isStudentRequest">
+    <wsdl:part element="tns:isStudentRequest" name="isStudentRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addUserResponse">
+    <wsdl:part element="tns:addUserResponse" name="addUserResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="isUserAlreadyRegisteredRequest">
+    <wsdl:part element="tns:isUserAlreadyRegisteredRequest" name="isUserAlreadyRegisteredRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="isManagerRequest">
+    <wsdl:part element="tns:isManagerRequest" name="isManagerRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="signInResponse">
+    <wsdl:part element="tns:signInResponse" name="signInResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getUserByIdResponse">
+    <wsdl:part element="tns:getUserByIdResponse" name="getUserByIdResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="isManagerResponse">
+    <wsdl:part element="tns:isManagerResponse" name="isManagerResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="isStudentResponse">
+    <wsdl:part element="tns:isStudentResponse" name="isStudentResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllUsersRequest">
+    <wsdl:part element="tns:getAllUsersRequest" name="getAllUsersRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="UserPort">
+    <wsdl:operation name="getAllUsers">
+      <wsdl:input message="tns:getAllUsersRequest" name="getAllUsersRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getAllUsersResponse" name="getAllUsersResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserById">
+      <wsdl:input message="tns:getUserByIdRequest" name="getUserByIdRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getUserByIdResponse" name="getUserByIdResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isUserAlreadyRegistered">
+      <wsdl:input message="tns:isUserAlreadyRegisteredRequest" name="isUserAlreadyRegisteredRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:isUserAlreadyRegisteredResponse" name="isUserAlreadyRegisteredResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addUser">
+      <wsdl:input message="tns:addUserRequest" name="addUserRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:addUserResponse" name="addUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteUser">
+      <wsdl:input message="tns:deleteUserRequest" name="deleteUserRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteUserResponse" name="deleteUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateUser">
+      <wsdl:input message="tns:updateUserRequest" name="updateUserRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:updateUserResponse" name="updateUserResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="signIn">
+      <wsdl:input message="tns:signInRequest" name="signInRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:signInResponse" name="signInResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isStudent">
+      <wsdl:input message="tns:isStudentRequest" name="isStudentRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:isStudentResponse" name="isStudentResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isManager">
+      <wsdl:input message="tns:isManagerRequest" name="isManagerRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:isManagerResponse" name="isManagerResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UserPortSoap11" type="tns:UserPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAllUsers">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getAllUsersRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllUsersResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserById">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getUserByIdRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getUserByIdResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isUserAlreadyRegistered">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="isUserAlreadyRegisteredRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="isUserAlreadyRegisteredResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addUser">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="addUserRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteUser">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="deleteUserRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateUser">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="updateUserRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateUserResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="signIn">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="signInRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="signInResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isStudent">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="isStudentRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="isStudentResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="isManager">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="isManagerRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="isManagerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserPortService">
+    <wsdl:port binding="tns:UserPortSoap11" name="UserPortSoap11">
+      <soap:address location="http://localhost:9191/service/user"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

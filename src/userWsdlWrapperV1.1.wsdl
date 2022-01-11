@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="userWsdlWrapperV1.1" targetNamespace="http://enterprise.netbeans.org/bpel/userWsdlWrapperV1.1" xmlns:tns="http://enterprise.netbeans.org/bpel/userWsdlWrapperV1.1" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns="http://www.hotelapp.com/xml/user">
+    <import location="userWsdl.wsdl" namespace="http://www.hotelapp.com/xml/user"/>
+    <plnk:partnerLinkType name="UserPortLinkType">
+        <plnk:role name="UserPortRole" portType="ns:UserPort"/>
+    </plnk:partnerLinkType>
+</definitions>

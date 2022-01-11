@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="DiscountWSDLWrapper" targetNamespace="http://enterprise.netbeans.org/bpel/DiscountWSDLWrapper" xmlns:tns="http://enterprise.netbeans.org/bpel/DiscountWSDLWrapper" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns="uk.ac.bcu.soa.wcf">
+    <import location="DiscountWSDL.wsdl" namespace="uk.ac.bcu.soa.wcf"/>
+    <plnk:partnerLinkType name="IDiscountRegistryLinkType">
+        <plnk:role name="IDiscountRegistryRole" portType="ns:IDiscountRegistry"/>
+    </plnk:partnerLinkType>
+</definitions>

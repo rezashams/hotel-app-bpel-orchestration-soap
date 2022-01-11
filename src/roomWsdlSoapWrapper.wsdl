@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="roomWsdlSoapWrapper" targetNamespace="http://enterprise.netbeans.org/bpel/roomWsdlSoapWrapper" xmlns:tns="http://enterprise.netbeans.org/bpel/roomWsdlSoapWrapper" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns="http://www.hotelapp.com/xml/room">
+    <import location="roomWsdlSoap.wsdl" namespace="http://www.hotelapp.com/xml/room"/>
+    <plnk:partnerLinkType name="RoomPortLinkType">
+        <plnk:role name="RoomPortRole" portType="ns:RoomPort"/>
+    </plnk:partnerLinkType>
+</definitions>
